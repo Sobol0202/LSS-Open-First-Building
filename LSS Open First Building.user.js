@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS Open First Building
 // @namespace    www.leitstellenspiel.de
-// @version      1.1
+// @version      1.2
 // @description  Fügt Schaltflächen zum Öffnen des ersten gebauten Gebäudes ein.
 // @author       MissSobol
 // @match        https://www.leitstellenspiel.de/
@@ -45,11 +45,12 @@
         // Definiere Gebäudetypen und ihre IDs
         var buttons = {
             "FW": [0, 18],   // Feuerwehrgebäude, IDs: 0 und 18
-            "RD": [3, 20],   // Rettungsdienstgebäude, IDs: 3 und 20
+            "RD": [2, 20],   // Rettungsdienstgebäude, IDs: 2 und 20
             "Pol": [6, 19],  // Polizeigebäude, IDs: 6 und 19
             "THW": [9],      // THW-Gebäude, ID: 9
             "SEG": [12],     // SEG-Gebäude, ID: 12
-            "Bpol": [11]     // Bundespolizeigebäude, ID: 11
+            "Bpol": [11],     // Bundespolizeigebäude, ID: 11
+            //Hier weitere Typen einfügen. Form muss wie folgt aussehen: "ButtonName": [Typennummer],
         };
 
         // Erstelle Schaltflächen für jeden definierten Gebäudetyp
