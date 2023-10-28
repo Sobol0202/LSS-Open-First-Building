@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS Open First Building
 // @namespace    www.leitstellenspiel.de
-// @version      1.0
+// @version      1.1
 // @description  Fügt Schaltflächen zum Öffnen des ersten gebauten Gebäudes ein.
 // @author       MissSobol
 // @match        https://www.leitstellenspiel.de/
@@ -37,7 +37,7 @@
     }
 
     // Finde das Container-Div für Gebäudeschaltflächen
-    var buildingsDiv = document.getElementById("btn-group-building-select");
+    var buildingsDiv = document.getElementById("building_panel_heading");
     if (buildingsDiv) {
         var buttonContainer = document.createElement("div");
         //buttonContainer.style.marginTop = "1px";
@@ -60,6 +60,6 @@
         }
 
         // Füge die erstellten Schaltflächen dem Container-Div hinzu
-        buildingsDiv.insertBefore(buttonContainer, buildingsDiv.firstChild);
+        buildingsDiv.appendChild(buttonContainer, buildingsDiv.firstChild);
     }
 })();
