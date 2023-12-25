@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         LSS Open First Building
 // @namespace    www.leitstellenspiel.de
-// @version      1.2
+// @version      1.3
 // @description  Fügt Schaltflächen zum Öffnen des ersten gebauten Gebäudes ein.
 // @author       MissSobol
 // @match        https://www.leitstellenspiel.de/
@@ -17,15 +17,23 @@
         button.textContent = text;
         button.className = "btn btn-xs btn-warning";
         //button.style.marginRight = "5px";
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function(event) {
             var apiUrl = "https://www.leitstellenspiel.de/api/buildings";
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
                     var filteredBuildings = data.filter(building => buildingTypes.includes(building.building_type));
                     if (filteredBuildings.length > 0) {
-                        var minIdBuilding = filteredBuildings.reduce((min, building) => building.id < min.id ? building : min, filteredBuildings[0]);
-                        var buildingId = minIdBuilding.id;
+                        var buildingId;
+                        if (event.ctrlKey) {
+                            // Wenn Strg-Taste gedrückt ist, wähle die größte ID
+                            var maxIdBuilding = filteredBuildings.reduce((max, building) => building.id > max.id ? building : max, filteredBuildings[0]);
+                            buildingId = maxIdBuilding.id;
+                        } else {
+                            // Ansonsten wähle die kleinste ID
+                            var minIdBuilding = filteredBuildings.reduce((min, building) => building.id < min.id ? building : min, filteredBuildings[0]);
+                            buildingId = minIdBuilding.id;
+                        }
                         window.open("https://www.leitstellenspiel.de/buildings/" + buildingId, "_blank");
                     } else {
                         console.log("Kein passendes Gebäude gefunden.");
